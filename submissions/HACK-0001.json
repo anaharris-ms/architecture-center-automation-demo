@@ -17,7 +17,9 @@
     "editorialReviewer": "anaharris@microsoft.com",
     "publisher": "anaharris@microsoft.com"
   },
-  "completedActions": [],
+  "completedActions": [
+    "teams:stage:pull-request-opened:3"
+  ],
   "reminderHistory": [],
-  "revision": 2
+  "revision": 3
 }
