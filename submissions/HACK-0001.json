@@ -1,0 +1,21 @@
+{
+  "submissionId": "HACK-0001",
+  "repository": {
+    "owner": "anaharris-ms",
+    "name": "architecture-center-automation-demo"
+  },
+  "articlePath": "docs/stage-automation-demo.md",
+  "currentStage": "drafting",
+  "reviewState": {
+    "history": []
+  },
+  "assignments": {
+    "technicalReviewer": "anaharris@microsoft.com",
+    "contentReviewer": "anaharris@microsoft.com",
+    "editorialReviewer": "anaharris@microsoft.com",
+    "publisher": "anaharris@microsoft.com"
+  },
+  "completedActions": [],
+  "reminderHistory": [],
+  "revision": 1
+}
