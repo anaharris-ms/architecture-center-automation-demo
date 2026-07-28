@@ -5,8 +5,10 @@
     "name": "architecture-center-automation-demo"
   },
   "articlePath": "docs/stage-automation-demo.md",
-  "currentStage": "drafting",
+  "pullRequestNumber": 3,
+  "currentStage": "technical-review",
   "reviewState": {
+    "openedCommitSha": "60bbcc88d554c5c9300e3ed62769f0a581f35f46",
     "history": []
   },
   "assignments": {
@@ -17,5 +19,5 @@
   },
   "completedActions": [],
   "reminderHistory": [],
-  "revision": 1
+  "revision": 2
 }
