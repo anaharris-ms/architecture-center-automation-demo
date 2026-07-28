@@ -1,0 +1,5 @@
+defaultApprover: Chad
+approvalMode: preapproved
+allowedRepositories:
+  - owner: anaharris-ms
+    name: architecture-center-automation-demo

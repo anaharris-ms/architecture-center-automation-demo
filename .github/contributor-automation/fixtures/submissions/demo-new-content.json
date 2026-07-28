@@ -1,0 +1,18 @@
+{
+  "submissionNumber": 2,
+  "contributor": {
+    "name": "Ana Harris",
+    "email": "anaharris@microsoft.com",
+    "githubUsername": "anaharris-ms"
+  },
+  "submissionType": "new-content",
+  "repository": {
+    "owner": "anaharris-ms",
+    "name": "architecture-center-automation-demo"
+  },
+  "articlePath": "docs/architecture/new-integration-pattern.md",
+  "proposal": {
+    "title": "Add an integration architecture pattern",
+    "summary": "Create a new architecture article describing the proposed integration pattern."
+  }
+}

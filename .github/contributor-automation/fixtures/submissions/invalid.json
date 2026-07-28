@@ -1,0 +1,19 @@
+{
+  "submissionNumber": 0,
+  "contributor": {
+    "name": "Invalid Example",
+    "email": "not-an-email",
+    "githubUsername": "-invalid-"
+  },
+  "submissionType": "other",
+  "repository": {
+    "owner": "example/invalid",
+    "name": "architecture-center-pr"
+  },
+  "articlePath": "../outside/article.txt",
+  "proposal": {
+    "title": "",
+    "summary": "Invalid fixture used to verify boundary errors."
+  },
+  "unexpectedField": true
+}
