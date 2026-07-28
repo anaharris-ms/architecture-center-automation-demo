@@ -6,10 +6,21 @@
   },
   "articlePath": "docs/stage-automation-demo.md",
   "pullRequestNumber": 3,
-  "currentStage": "technical-review",
+  "currentStage": "drafting",
   "reviewState": {
+    "resumeStage": "technical-review",
     "openedCommitSha": "60bbcc88d554c5c9300e3ed62769f0a581f35f46",
-    "history": []
+    "history": [
+      {
+        "eventId": "30373009616",
+        "action": "changes-requested",
+        "fromStage": "technical-review",
+        "toStage": "drafting",
+        "githubActor": "ckittel",
+        "commitSha": "60bbcc88d554c5c9300e3ed62769f0a581f35f46",
+        "recordedAt": "2026-07-28T15:22:00Z"
+      }
+    ]
   },
   "assignments": {
     "technicalReviewer": "anaharris@microsoft.com",
@@ -21,5 +32,5 @@
     "teams:stage:pull-request-opened:3"
   ],
   "reminderHistory": [],
-  "revision": 3
+  "revision": 4
 }
