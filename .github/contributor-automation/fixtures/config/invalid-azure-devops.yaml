@@ -1,0 +1,8 @@
+organization: ""
+project: Content
+parentId: 0
+allowedPrefix: TEST
+tags:
+  - Hackathon
+  - Hackathon
+unexpected: true

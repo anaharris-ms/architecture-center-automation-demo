@@ -1,0 +1,123 @@
+name: Contributor intake
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Execution mode
+        required: true
+        type: choice
+        options:
+          - plan
+          - apply
+      submission-id:
+        description: Stable HACK submission ID used for concurrency
+        required: true
+        type: string
+      submission-file:
+        description: Repository-relative faux submission file
+        required: true
+        default: fixtures/submissions/update.json
+        type: string
+
+defaults:
+  run:
+    working-directory: .github/contributor-automation
+
+jobs:
+  plan:
+    name: Validate contributor intake plan
+    if: inputs.mode == 'plan'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    env:
+      SUBMISSION_FILE: ${{ inputs.submission-file }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: .github/contributor-automation/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Compile TypeScript
+        run: npm run compile
+
+      - name: Generate plan
+        run: npm start -- plan --submission "$SUBMISSION_FILE" --config config/intake-rules.yaml
+
+  apply:
+    name: Apply contributor intake plan
+    if: inputs.mode == 'apply'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: azure-devops
+    permissions:
+      contents: write
+      id-token: write
+    concurrency:
+      group: ado-apply-${{ inputs.submission-id }}
+      cancel-in-progress: false
+    env:
+      AZURE_DEVOPS_MODE: mock
+      GITHUB_CONTRIBUTION_BASE_BRANCH: hackathon
+      GITHUB_TOKEN: ${{ github.token }}
+      GITHUB_STATE_BRANCH: submission-state
+      DEFAULT_REVIEWER_EMAIL: anaharris@microsoft.com
+      SUBMISSION_FILE: ${{ inputs.submission-file }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: .github/contributor-automation/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Compile TypeScript
+        run: npm run compile
+
+      - name: Sign in to Microsoft Entra
+        if: env.AZURE_DEVOPS_MODE == 'entra'
+        uses: azure/login@a457da9ea143d694b1b9c7c869ebb04ebe844ef5
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          allow-no-subscriptions: true
+
+      - name: Apply plan
+        shell: bash
+        env:
+          GITHUB_REPOSITORY_TOKEN: ${{ github.token }}
+          POWER_AUTOMATE_START_URL: ${{ secrets.POWER_AUTOMATE_START_URL }}
+        run: |
+          if [[ "$AZURE_DEVOPS_MODE" == "entra" ]]; then
+            access_token="$(az account get-access-token --resource 499b84ac-1321-427f-aa17-267ca6975798 --query accessToken --output tsv)"
+            echo "::add-mask::$access_token"
+            AZURE_DEVOPS_TOKEN="$access_token" npm start -- apply --submission "$SUBMISSION_FILE" --config config/intake-rules.yaml
+          else
+            npm start -- apply --submission "$SUBMISSION_FILE" --config config/intake-rules.yaml
+          fi
+
+      - name: Upload start-work email
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: start-work-${{ inputs.submission-id }}
+          path: .github/contributor-automation/artifacts/start-contribution/*.eml
+          if-no-files-found: error
+          retention-days: 7

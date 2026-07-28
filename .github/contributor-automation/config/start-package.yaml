@@ -1,0 +1,9 @@
+senderName: Patterns & Practices Content Team
+senderAddress: cloud-arch-content@microsoft.com
+subject: Azure Architecture Center Contribution Proposal
+idWebUrl: https://placeholder.example/idweb
+accessHelpUrl: https://placeholder.example/request-access
+contributionOptionsUrl: https://placeholder.example/contribution-options
+bannerPath: assets/email/microsoft-learn-header.png
+footerPath: assets/email/microsfot-footer.png
+outputDirectory: artifacts/start-contribution

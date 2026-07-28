@@ -1,0 +1,18 @@
+{
+  "submissionNumber": 1,
+  "contributor": {
+    "name": "Ana Harris",
+    "email": "anaharris@microsoft.com",
+    "githubUsername": "anaharris-ms"
+  },
+  "submissionType": "update",
+  "repository": {
+    "owner": "anaharris-ms",
+    "name": "architecture-center-automation-demo"
+  },
+  "articlePath": "docs/networking/architecture/hub-spoke-content.md",
+  "proposal": {
+    "title": "Update hub-spoke network architecture guidance",
+    "summary": "Refresh the hub-spoke reference architecture with current service guidance."
+  }
+}

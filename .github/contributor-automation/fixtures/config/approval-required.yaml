@@ -1,0 +1,5 @@
+defaultApprover: Jordan
+approvalMode: approval-required
+allowedRepositories:
+  - owner: anaharris-ms
+    name: architecture-center-pr

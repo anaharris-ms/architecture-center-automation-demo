@@ -1,0 +1,32 @@
+{
+  "name": "pnp-contributor-automation-pipeline",
+  "version": "0.1.0",
+  "description": "Contributor submission automation pipeline for GitHub and Azure DevOps",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "clean": "node --run clean:output",
+    "clean:output": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
+    "compile": "npm run clean && tsc",
+    "lint": "eslint .",
+    "pull-request-receive": "node dist/src/cli/pullRequestReceiverMain.js",
+    "start": "node dist/src/cli/main.js",
+    "standards": "npm run compile && node dist/tools/standards/main.js",
+    "test": "npm run compile && node --test \"dist/tests/**/*.test.js\"",
+    "verify": "npm run lint && npm run standards && npm run test"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "@types/node": "^26.1.1",
+    "eslint": "^10.7.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.64.1-alpha.4"
+  },
+  "dependencies": {
+    "yaml": "^2.9.0"
+  }
+}

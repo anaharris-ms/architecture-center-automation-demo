@@ -1,0 +1,11 @@
+defaultApprover: ""
+approvalMode: automatic
+allowedRepositories:
+  - owner: ""
+    name: architecture-center-pr
+    unexpectedRepositoryField: true
+  - owner: anaharris-ms
+    name: architecture-center-pr
+  - owner: ANAHARRIS-MS
+    name: ARCHITECTURE-CENTER-PR
+unexpected: true
